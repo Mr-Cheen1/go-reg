@@ -4,8 +4,8 @@ import (
 	"fmt"
 	"strconv"
 
-	"github.com/xuri/excelize/v2"
 	"github.com/Mr-Cheen1/go-reg/models"
+	"github.com/xuri/excelize/v2"
 )
 
 type ExcelStorage struct {
@@ -41,10 +41,18 @@ func (es *ExcelStorage) Load() (models.Products, error) {
 		// Если файл не существует, создаем новый
 		es.file = excelize.NewFile()
 		// Создаем заголовки
-		es.file.SetCellValue("Sheet1", "A1", "ID")
-		es.file.SetCellValue("Sheet1", "B1", "Наименование")
-		es.file.SetCellValue("Sheet1", "C1", "Время обработки в часах")
-		es.file.SetCellValue("Sheet1", "D1", "Расчет времени")
+		if err := es.file.SetCellValue("Sheet1", "A1", "ID"); err != nil {
+			return products, fmt.Errorf("ошибка при установке заголовка ID: %w", err)
+		}
+		if err := es.file.SetCellValue("Sheet1", "B1", "Наименование"); err != nil {
+			return products, fmt.Errorf("ошибка при установке заголовка Наименование: %w", err)
+		}
+		if err := es.file.SetCellValue("Sheet1", "C1", "Время обработки в часах"); err != nil {
+			return products, fmt.Errorf("ошибка при установке заголовка Время обработки: %w", err)
+		}
+		if err := es.file.SetCellValue("Sheet1", "D1", "Расчет времени"); err != nil {
+			return products, fmt.Errorf("ошибка при установке заголовка Расчет времени: %w", err)
+		}
 		return products, es.file.SaveAs(es.filename)
 	}
 
@@ -87,18 +95,34 @@ func (es *ExcelStorage) Save(products models.Products) error {
 	es.file = excelize.NewFile()
 
 	// Записываем заголовки
-	es.file.SetCellValue("Sheet1", "A1", "ID")
-	es.file.SetCellValue("Sheet1", "B1", "Наименование")
-	es.file.SetCellValue("Sheet1", "C1", "Время обработки в часах")
-	es.file.SetCellValue("Sheet1", "D1", "Расчет времени")
+	if err := es.file.SetCellValue("Sheet1", "A1", "ID"); err != nil {
+		return err
+	}
+	if err := es.file.SetCellValue("Sheet1", "B1", "Наименование"); err != nil {
+		return err
+	}
+	if err := es.file.SetCellValue("Sheet1", "C1", "Время обработки в часах"); err != nil {
+		return err
+	}
+	if err := es.file.SetCellValue("Sheet1", "D1", "Расчет времени"); err != nil {
+		return err
+	}
 
 	// Записываем данные
 	for i, product := range products {
 		row := i + 2
-		es.file.SetCellValue("Sheet1", fmt.Sprintf("A%d", row), product.ID)
-		es.file.SetCellValue("Sheet1", fmt.Sprintf("B%d", row), product.Name)
-		es.file.SetCellValue("Sheet1", fmt.Sprintf("C%d", row), product.ProcessingTime)
-		es.file.SetCellValue("Sheet1", fmt.Sprintf("D%d", row), product.TimeCalculation)
+		if err := es.file.SetCellValue("Sheet1", fmt.Sprintf("A%d", row), product.ID); err != nil {
+			return err
+		}
+		if err := es.file.SetCellValue("Sheet1", fmt.Sprintf("B%d", row), product.Name); err != nil {
+			return err
+		}
+		if err := es.file.SetCellValue("Sheet1", fmt.Sprintf("C%d", row), product.ProcessingTime); err != nil {
+			return err
+		}
+		if err := es.file.SetCellValue("Sheet1", fmt.Sprintf("D%d", row), product.TimeCalculation); err != nil {
+			return err
+		}
 	}
 
 	// Сохраняем файл
@@ -111,4 +135,4 @@ func (es *ExcelStorage) Close() error {
 		return es.file.Close()
 	}
 	return nil
-} 
+}

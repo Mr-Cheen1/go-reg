@@ -58,4 +58,4 @@ func (p Products) GetNextID() int {
 		}
 	}
 	return maxID + 1
-} 
+}

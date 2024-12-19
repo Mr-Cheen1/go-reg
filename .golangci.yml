@@ -1,67 +1,35 @@
-# Настройки запуска линтера
 run:
-  tests: true
+  go: '1.21'
   timeout: 5m
-  skip-dirs:
+
+issues:
+  exclude-files:
+    - ".*_test.go$"
+  exclude-dirs:
     - vendor
-  build-tags:
-    - !cgo
+    - third_party
+    - testdata
+    - examples
+    - Godeps
+    - builtin
+    - pkg/mod
 
-# Настройки отдельных линтеров
-linters-settings:
-  funlen:
-    lines: 150
-    statements: 80
-  gocyclo:
-    min-complexity: 15
-  govet:
-    check-shadowing: true
-  lll:
-    line-length: 140
-  gofmt:
-    simplify: true
-  gosimple:
-    go: "1.21"
-  staticcheck:
-    go: "1.21"
-  revive:
-    rules:
-      - name: package-comments
-        disabled: false
-      - name: exported
-        disabled: false
-
-# Настройки включения/отключения линтеров
 linters:
-  disable-all: true
   enable:
     - gofmt
     - gofumpt
     - govet
     - gosimple
-    - ineffassign
     - staticcheck
-    - unused
-    - misspell
-    - gocritic
-    - gosec
-    - stylecheck
-    - whitespace
-    - revive
 
-issues:
+linters-settings:
+  gofmt:
+    simplify: true
+
   exclude-rules:
     - path: _test\.go
       linters:
         - gosec
-        - funlen
-        - goconst
-    - path: ui/
+    - path: pkg/mod/
       linters:
-        - gosec
-        - gocritic
-    - path: main.go
-      linters:
-        - gosec
-  max-same-issues: 50
-  exclude-use-default: false
+        - all

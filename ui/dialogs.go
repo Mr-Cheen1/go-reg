@@ -14,9 +14,9 @@ import (
 	"github.com/Mr-Cheen1/go-reg/utils"
 )
 
-func ShowEditDialog(parent fyne.Window, product models.Product, list *widget.List, 
-	searchEntry *widget.Entry, products *models.Products, storage *storage.ExcelStorage) {
-	
+func ShowEditDialog(parent fyne.Window, product models.Product, list *widget.List,
+	searchEntry *widget.Entry, products *models.Products, storage *storage.ExcelStorage,
+) {
 	editWindow := fyne.CurrentApp().NewWindow("Редактировать запись")
 	editWindow.SetIcon(theme.DocumentIcon())
 
@@ -39,7 +39,7 @@ func ShowEditDialog(parent fyne.Window, product models.Product, list *widget.Lis
 			if name == "" {
 				return
 			}
-			
+
 			timeCalc := timeEntry.Text
 			if strings.TrimSpace(timeCalc) == "" {
 				timeCalc = "0"
@@ -84,9 +84,9 @@ func ShowEditDialog(parent fyne.Window, product models.Product, list *widget.Lis
 	editWindow.Show()
 }
 
-func ShowAddDialog(parent fyne.Window, list *widget.List, searchEntry *widget.Entry, 
-	products *models.Products, storage *storage.ExcelStorage) {
-	
+func ShowAddDialog(parent fyne.Window, list *widget.List, searchEntry *widget.Entry,
+	products *models.Products, storage *storage.ExcelStorage,
+) {
 	addWindow := fyne.CurrentApp().NewWindow("Добавить запись")
 	addWindow.SetIcon(theme.DocumentIcon())
 
@@ -109,7 +109,7 @@ func ShowAddDialog(parent fyne.Window, list *widget.List, searchEntry *widget.En
 			if name == "" {
 				return
 			}
-			
+
 			timeCalc := timeEntry.Text
 			if strings.TrimSpace(timeCalc) == "" {
 				timeCalc = "0"
@@ -149,4 +149,4 @@ func ShowAddDialog(parent fyne.Window, list *widget.List, searchEntry *widget.En
 	addWindow.Resize(fyne.NewSize(400, 300))
 	addWindow.CenterOnScreen()
 	addWindow.Show()
-} 
+}

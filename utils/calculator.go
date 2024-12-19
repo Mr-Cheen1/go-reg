@@ -19,4 +19,4 @@ func CalculateTime(timeStr string) float64 {
 		}
 	}
 	return total
-} 
+}

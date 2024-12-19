@@ -2,6 +2,7 @@ package tests
 
 import (
 	"testing"
+
 	"github.com/Mr-Cheen1/go-reg/models"
 )
 
@@ -35,22 +36,22 @@ func TestProductSearch(t *testing.T) {
 
 func TestProductDelete(t *testing.T) {
 	tests := []struct {
-		name         string
-		deleteID     int
-		initialLen   int
-		expectedLen  int
+		name        string
+		deleteID    int
+		initialLen  int
+		expectedLen int
 	}{
 		{
-			name:         "Удаление существующего",
-			deleteID:     2,
-			initialLen:   3,
-			expectedLen:  2,
+			name:        "Удаление существующего",
+			deleteID:    2,
+			initialLen:  3,
+			expectedLen: 2,
 		},
 		{
-			name:         "Удаление несуществующего",
-			deleteID:     99,
-			initialLen:   2,
-			expectedLen:  2,
+			name:        "Удаление несуществующего",
+			deleteID:    99,
+			initialLen:  2,
+			expectedLen: 2,
 		},
 	}
 
@@ -83,7 +84,7 @@ func TestGetNextID(t *testing.T) {
 		expected int
 	}{
 		{
-			name: "Пустой список",
+			name:     "Пустой список",
 			products: models.Products{},
 			expected: 1,
 		},
@@ -111,4 +112,4 @@ func TestGetNextID(t *testing.T) {
 			}
 		})
 	}
-} 
+}

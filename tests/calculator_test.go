@@ -2,6 +2,7 @@ package tests
 
 import (
 	"testing"
+
 	"github.com/Mr-Cheen1/go-reg/utils"
 )
 
@@ -26,9 +27,9 @@ func TestCalculateTime(t *testing.T) {
 		t.Run(tt.name, func(t *testing.T) {
 			result := utils.CalculateTime(tt.input)
 			if result != tt.expected {
-				t.Errorf("CalculateTime(%q) = %v, ожидалось %v", 
+				t.Errorf("CalculateTime(%q) = %v, ожидалось %v",
 					tt.input, result, tt.expected)
 			}
 		})
 	}
-} 
+}

@@ -13,7 +13,7 @@ import (
 func main() {
 	myApp := app.NewWithID("com.mr-cheen1.go-reg")
 	myApp.Preferences().SetString("theme", "dark")
-	
+
 	window := myApp.NewWindow("Редактор базы данных")
 
 	excelStorage := storage.NewExcelStorage()

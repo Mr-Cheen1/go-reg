@@ -13,12 +13,12 @@ import (
 )
 
 type MainWindow struct {
-	window       fyne.Window
-	products     *models.Products
+	window        fyne.Window
+	products      *models.Products
 	searchResults *models.Products
-	storage      *storage.ExcelStorage
-	productList  *widget.List
-	searchEntry  *widget.Entry
+	storage       *storage.ExcelStorage
+	productList   *widget.List
+	searchEntry   *widget.Entry
 }
 
 func NewMainWindow(window fyne.Window, storage *storage.ExcelStorage) *MainWindow {
@@ -73,7 +73,7 @@ func (w *MainWindow) createUI() {
 			editBtn.OnTapped = func() {
 				ShowEditDialog(w.window, product, w.productList, w.searchEntry, w.products, w.storage)
 			}
-			
+
 			deleteBtn.OnTapped = func() {
 				w.products.Delete(product.ID)
 				if err := w.storage.Save(*w.products); err != nil {
@@ -123,4 +123,4 @@ func (w *MainWindow) updateListState(query string) {
 	if w.productList != nil {
 		w.productList.Refresh()
 	}
-} 
+}

@@ -11,7 +11,7 @@ import (
 func TestExcelStorage(t *testing.T) {
 	// Используем временный файл для тестов
 	const testFile = "test_database.xlsx"
-	
+
 	// Удаляем тестовый файл после завершения тестов
 	defer os.Remove(testFile)
 
@@ -53,11 +53,11 @@ func TestExcelStorage(t *testing.T) {
 				t.Errorf("Name записи %d: получено %s, ожидалось %s", i, loaded.Name, expected.Name)
 			}
 			if loaded.ProcessingTime != expected.ProcessingTime {
-				t.Errorf("ProcessingTime записи %d: получено %f, ожидалось %f", 
+				t.Errorf("ProcessingTime записи %d: получено %f, ожидалось %f",
 					i, loaded.ProcessingTime, expected.ProcessingTime)
 			}
 			if loaded.TimeCalculation != expected.TimeCalculation {
-				t.Errorf("TimeCalculation записи %d: получено %s, ожидалось %s", 
+				t.Errorf("TimeCalculation записи %d: получено %s, ожидалось %s",
 					i, loaded.TimeCalculation, expected.TimeCalculation)
 			}
 		}
@@ -118,16 +118,16 @@ func TestExcelStorage(t *testing.T) {
 
 		// Проверяем обновленные данные
 		if loadedProducts[0].Name != "Обновленный тест 1" {
-			t.Errorf("Имя не обновилось: получено %s, ожидалось 'Обновленный тест 1'", 
+			t.Errorf("Имя не обновилось: получено %s, ожидалось 'Обновленный тест 1'",
 				loadedProducts[0].Name)
 		}
 		if loadedProducts[1].ProcessingTime != 4.0 {
-			t.Errorf("Время обработки не обновилось: получено %f, ожидалось 4.0", 
+			t.Errorf("Время обработки не обновилось: получено %f, ожидалось 4.0",
 				loadedProducts[1].ProcessingTime)
 		}
 		if loadedProducts[1].TimeCalculation != "2 + 2" {
-			t.Errorf("Расчет времени не обновился: получено %s, ожидалось '2 + 2'", 
+			t.Errorf("Расчет времени не обновился: получено %s, ожидалось '2 + 2'",
 				loadedProducts[1].TimeCalculation)
 		}
 	})
-} 
+}
