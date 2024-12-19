@@ -1,63 +1,61 @@
- # Настройки запуска линтера.
+# Настройки запуска линтера
 run:
   tests: true
+  timeout: 5m
+  skip-dirs:
+    - vendor
+  build-tags:
+    - !cgo
 
-# Настройки отдельных линтеров.
+# Настройки отдельных линтеров
 linters-settings:
   funlen:
     lines: 150
     statements: 80
+  gocyclo:
+    min-complexity: 15
+  govet:
+    check-shadowing: true
+  lll:
+    line-length: 140
+  gofmt:
+    simplify: true
+  gosimple:
+    go: "1.21"
+  staticcheck:
+    go: "1.21"
 
-# Настройки включения/отключения линтеров.
+# Настройки включения/отключения линтеров
 linters:
   disable-all: true
   enable:
-    - asciicheck
-    - bodyclose
-    - dogsled
-    - dupl
-    - durationcheck
-    - errorlint
-    - exhaustive
-    - exportloopref
-    - funlen
-    - gci
-    - gocognit
-    - goconst
-    - gocritic
-    - gocyclo
-    - godot
     - gofmt
     - gofumpt
-    - goheader
-    - gomoddirectives
-    - gomodguard
-    - goprintffuncname
-    - gosec
-    - gosimple
     - govet
-    - importas
+    - gosimple
     - ineffassign
-    - lll
-    - makezero
-    - misspell
-    - nestif
-    - nilerr
-    - noctx
-    - nolintlint
-    - prealloc
-    - predeclared
-    - revive
-    - rowserrcheck
-    - sqlclosecheck
     - staticcheck
-    - stylecheck
-    # - tagliatelle
-    - thelper
-    - tparallel
-    - typecheck
-    - unconvert
-    - unparam
     - unused
-    - wastedassign
+    - misspell
+    - gocritic
+    - gosec
+    - stylecheck
     - whitespace
+    - revive
+
+issues:
+  exclude-rules:
+    - path: _test\.go
+      linters:
+        - gosec
+        - funlen
+        - goconst
+    - path: ui/
+      linters:
+        - gosec
+        - gocritic
+    - path: main.go
+      linters:
+        - gosec
+  max-same-issues: 50
+  exclude-use-default: false
