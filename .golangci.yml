@@ -24,6 +24,12 @@ linters-settings:
     go: "1.21"
   staticcheck:
     go: "1.21"
+  revive:
+    rules:
+      - name: package-comments
+        disabled: false
+      - name: exported
+        disabled: false
 
 # Настройки включения/отключения линтеров
 linters:
